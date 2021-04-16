@@ -121,11 +121,10 @@ simg <- function(seed) {
   })
   if (any(is.na(fe1))) {
     print(paste("Failed:", seed))
-    return(list(fe = NA, re = NA, vc = NA, time = time1, seed = seed))
   } else {
     print(paste("Done:", seed))
-    list(fe = fe1, re = re1, vc = vc1, time = time1, seed = seed)
   }
+  return(list(fe = fe1, re = re1, vc = vc1, time = time1, seed = seed))
 }
 
 ## === Simulations
@@ -221,6 +220,7 @@ which(sapply(sim_garcia, function(x) any(is.na(x$fe))))
 which(sapply(sim_tramME, function(x) any(is.na(x$fe))))
 
 ## --- Figure 6
+pdf("Fig6.pdf", width = 9, height = 7.5)
 n <- ncol(rres_garcia[[1]])
 par(mfrow = c(ceiling(n/2), 2), mar = c(4, 5.5, 3, 1), cex = 0.8,
     las = 1, xaxs="i")
@@ -265,8 +265,10 @@ for (i in 1:n) {
            lwd = c(3, 2, 2), bty = "n", cex = 0.9)
   }
 }
+dev.off()
 
 ## --- Fig 7
+pdf("Fig7.pdf", width = 11, height = 9)
 idx <- which(lower.tri(rvc_true, diag = TRUE), arr.ind = TRUE)
 nm <- c("Frailty term", expression(Age), expression(mMRC), expression(FEV[1]))
 par(mfrow = c(4, 4))
@@ -307,8 +309,10 @@ for (ii in 1:nrow(idx)) {
          col = c(1, colorspace::qualitative_hcl(6, "Dark 3")[c(1, 3)]),
          lwd = c(3, 2, 2), xpd = TRUE, cex = 1.4)
 }
+dev.off()
 
 ## --- Fig 8
+pdf("Fig8.pdf", width = 7, height = 4)
 par(mfrow = c(1, nrow(mse$tramME)), las = 1, cex = 0.8,
     mar = c(7.4, 4.1, 4.1, 1))
 c1 <- colorspace::qualitative_hcl(6, "Dark 3")[c(1, 3)]
@@ -327,3 +331,4 @@ for (ii in 1:nrow(mse$tramME)) {
   text(1:2, aloc, srt = 50, adj = 1,
        labels = c("Garcia et al.", "Transformation model"), xpd = TRUE)
 }
+dev.off()
