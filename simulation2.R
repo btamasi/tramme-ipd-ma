@@ -62,14 +62,14 @@ simt <- function(seed) {
   set.seed(seed)
   ## --- Simulate from model
   sim <- simulate(fit, what = "response")
-  dat$ys <- sim
-  dat2 <- dat ## for OOS LL calculations
+  data3CIA$ys <- sim
+  dat2 <- data3CIA ## for OOS LL calculations
   dat2$ys <- simulate(fit, what = "response")
   ## --- No misspec
   time1 <- system.time({
     mm1 <-  try(
       CoxphME(ys ~ ages + mmrcs + fev1pps + (ages + mmrcs + fev1pps | cohort),
-      data = dat, log_first = TRUE, order = 4, support = c(1, 150), estinit = FALSE, #initpar = pr,
+      data = data3CIA, log_first = TRUE, order = 4, support = c(1, 150), estinit = FALSE,
       control = optim_control(iter.max = 500, eval.max = 500, rel.tol = 1e-8))
     )
     pi1 <- E_PI(mm1, scale = sc2)
@@ -87,7 +87,7 @@ simt <- function(seed) {
   time2 <- system.time({
     mm2 <-  try(
       ColrME(ys ~ ages + mmrcs + fev1pps + (ages + mmrcs + fev1pps | cohort),
-      data = dat, log_first = TRUE, order = 4, support = c(1, 150), estinit = FALSE,
+      data = data3CIA, log_first = TRUE, order = 4, support = c(1, 150), estinit = FALSE,
       control = optim_control(iter.max = 500, eval.max = 500, rel.tol = 1e-8))
     )
     pi2 <- E_PI(mm2, scale = sc2)
@@ -111,7 +111,7 @@ simt <- function(seed) {
 }
 
 ## NOTE: control the number of draws by setting this vector
-seeds <- 3001:4000
+seeds <- 1001:2000
 ## sim_misspec <- lapply(seeds, function(ii) simt(ii))
 sim_misspec <- parallel::mclapply(seeds, function(ii) simt(ii), mc.cores = 8)
 

@@ -13,7 +13,7 @@
 options(warn = -1)
 
 library("survival")
-library("tramME") ## >= 0.1.0
+library("tramME") ## 0.1.2
 library("lme4")
 
 ## === Load the example dataset (see demo("IPD-MA", package = "tramME"))
