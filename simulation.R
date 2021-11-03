@@ -8,7 +8,7 @@
 ## IMPORTANT: The code does not exactly replicate the simulation results,
 ## because it is based on a subset of the original 3CIA dataset.
 ##
-## 15/04/2021 by B. Tamasi
+## 03/11/2021 by B. Tamasi
 ## ========================================================================
 options(warn = -1)
 
@@ -219,8 +219,8 @@ ti <- sapply(seq_along(sim_garcia), function(i) {
 which(sapply(sim_garcia, function(x) any(is.na(x$fe))))
 which(sapply(sim_tramME, function(x) any(is.na(x$fe))))
 
-## --- Figure 6
-pdf("Fig6.pdf", width = 9, height = 7.5)
+## --- Figure 3
+pdf("Fig3.pdf", width = 9, height = 7.5)
 n <- ncol(rres_garcia[[1]])
 par(mfrow = c(ceiling(n/2), 2), mar = c(4, 5.5, 3, 1), cex = 0.8,
     las = 1, xaxs="i")
@@ -267,8 +267,8 @@ for (i in 1:n) {
 }
 dev.off()
 
-## --- Fig 7
-pdf("Fig7.pdf", width = 11, height = 9)
+## --- Figure S-8
+pdf("FigS-8.pdf", width = 11, height = 9)
 idx <- which(lower.tri(rvc_true, diag = TRUE), arr.ind = TRUE)
 nm <- c("Frailty term", expression(Age), expression(mMRC), expression(FEV[1]))
 par(mfrow = c(4, 4))
@@ -311,8 +311,8 @@ for (ii in 1:nrow(idx)) {
 }
 dev.off()
 
-## --- Fig 8
-pdf("Fig8.pdf", width = 7, height = 4)
+## --- Figure S-9
+pdf("FigS-9.pdf", width = 7, height = 4)
 par(mfrow = c(1, nrow(mse$tramME)), las = 1, cex = 0.8,
     mar = c(7.4, 4.1, 4.1, 1))
 c1 <- colorspace::qualitative_hcl(6, "Dark 3")[c(1, 3)]
