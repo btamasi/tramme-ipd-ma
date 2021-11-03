@@ -1,5 +1,5 @@
 ## ========================================================================
-## Supplementary code to demostrate the structure of the simulation
+## Supplementary code to demostrate the structure of the main simulation
 ## exercise of the article
 ##
 ## "Individual participant data meta-analysis with mixed-effects
